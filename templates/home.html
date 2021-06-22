@@ -1,0 +1,148 @@
+<!doctype html>
+{% extends 'nav-bar.html' %}
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}HOME{% endblock %}</title>
+
+</head>
+{% block content %}
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
+<style>
+
+ .countdown-container{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+margin: 0;
+font-family: 'Abhaya Libre', serif;
+}
+
+ .big{
+font-size: 4.8rem;
+font-weight: bold;
+margin: 0 2rem;
+}
+
+ span{
+font-size: 1rem;
+text-align: center;
+margin-left: 2.7rem;
+}
+
+.header{
+font-family: 'Akaya Telivigala', cursive;
+font-weight: bold;
+text-align: center;
+margin-top: 1rem;
+}
+
+</style>
+<body>
+    <h2 class="header"> Upcoming Event: Campus Arrival </h2>
+<div class="countdown-container">
+    <div class="days">
+    <p class="big" id="days1"> </p>
+    <span> DAYS </span>
+    </div>
+    <div class="hours">
+    <p class="big" id="hours1"></p>
+    <span> HOURS </span>
+    </div>
+    <div class="minutes">
+    <p class="big" id="minutes1"></p>
+    <span> MINUTES </span>
+    </div>
+    <div class="seconds">
+    <p class="big" id="seconds1"></p>
+    <span> SECONDS </span>
+    </div>
+</div>
+
+ <h2 class="header"> Tentative: Covid Second Dose </h2>
+<div class="countdown-container">
+    <div class="days">
+    <p class="big" id="days2"> </p>
+    <span> DAYS </span>
+    </div>
+    <div class="hours">
+    <p class="big" id="hours2"></p>
+    <span> HOURS </span>
+    </div>
+    <div class="minutes">
+    <p class="big" id="minutes2"></p>
+    <span> MINUTES </span>
+    </div>
+    <div class="seconds">
+    <p class="big" id="seconds2"></p>
+    <span> SECONDS </span>
+    </div>
+</div>
+<script>
+    const event= '21 Aug 2021';
+const daysEl = document.getElementById('days1');
+const hoursEl = document.getElementById('hours1');
+const minutesEl = document.getElementById('minutes1');
+const secondsEl = document.getElementById('seconds1');
+
+const event2= '11 Aug 2021';
+const daysEl2 = document.getElementById('days2');
+const hoursEl2 = document.getElementById('hours2');
+const minutesEl2 = document.getElementById('minutes2');
+const secondsEl2 = document.getElementById('seconds2');
+
+function countdown(){
+const eventDate = new Date(event);
+const currentDate = new Date();
+
+const totalSec = (eventDate-currentDate)/1000;
+
+const days = Math.floor(totalSec/3600/24);
+const hours = Math.floor(totalSec/3600) % 24;
+const minutes = Math.floor(totalSec/60) % 60;
+const seconds = Math.floor(totalSec) % 60;
+
+daysEl.innerHTML = formatTime(days);
+hoursEl.innerHTML = formatTime(hours);
+minutesEl.innerHTML = formatTime(minutes);
+secondsEl.innerHTML = formatTime(seconds);
+
+}
+
+function countdown2(){
+const eventDate = new Date(event2);
+const currentDate = new Date();
+
+const totalSec = (eventDate-currentDate)/1000;
+
+const days = Math.floor(totalSec/3600/24);
+const hours = Math.floor(totalSec/3600) % 24;
+const minutes = Math.floor(totalSec/60) % 60;
+const seconds = Math.floor(totalSec) % 60;
+
+daysEl2.innerHTML = formatTime(days);
+hoursEl2.innerHTML = formatTime(hours);
+minutesEl2.innerHTML = formatTime(minutes);
+secondsEl2.innerHTML = formatTime(seconds);
+
+}
+
+function formatTime(time){
+return time<10? (`0${time}`): time;
+}
+
+countdown();
+setInterval(countdown, 1000);
+
+countdown2();
+setInterval(countdown2, 1000);
+
+</script>
+</body>
+{% endblock %}
+</html>

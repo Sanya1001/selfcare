@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}WELCOME{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fruktur&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+    body{
+font-family: 'Fruktur', cursive;
+letter-spacing: 1px;
+min-height: 100vh;
+background-image: radial-gradient(circle, #eef2f8, #e3ebf8, #d9e5f9, #cfdef9, #c5d7f9);
+background-size: cover;
+}
+
+.card-body{
+font-family: 'Abhaya Libre', serif;
+}
+.card-title{
+    font-family: 'Akaya Telivigala', cursive;
+    font-size: 1.3rem;
+    }
+
+nav{
+    position: fixed;
+    top: 0rem;
+    right: 0rem;
+    background-color: #663399;
+    height: 100vh;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+}
+
+.navbar {
+    display: flex;
+    background-color: #663399;
+    height: 3rem;
+    font-family: 'Fruktur', cursive;
+}
+
+.navitem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2rem;
+    color: #88f0f2;
+    font-size: 1.5rem;
+}
+
+#nav-btn{
+    position: fixed;
+    right: 1rem;
+    padding: 1rem;
+    background-color: #88f0f2;
+    color: #663399;
+    transition: transform 0.3s ease-in-out;
+}
+
+nav ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+nav ul li{
+    padding: 1rem 1rem;
+    overflow: hidden;
+}
+
+nav.active {
+    transform: translateX(0%);
+}
+
+#nav-btn.active {
+    transform: translateX(-125px);
+}
+
+a{
+color: #88f0f2;
+text-decoration: none;
+}
+
+</style>
+<div class="navbar">
+    <div class="navitem"><a href="{% url 'home' %}">SelfCare</a></div>
+    <div class="navitem">
+        <button id="nav-btn">☰
+        </button>
+    </div>
+    <nav id="nav">
+        <ul>
+            <li><a href="{% url 'events' %}" class="menu">Events</a></li>
+            <li><a href="{% url 'resources' %}" class="menu">Resources</a></li>
+            <li><a href="{% url 'todo' %}" class="menu">Todo</a></li>
+            <li><a href="{% url 'checkin' %}"class="menu">Health Gauge</a></li>
+        </ul>
+    </nav>
+</div>
+<script>
+    const btn = document.getElementById('nav-btn')
+const nav = document.getElementById('nav');
+
+btn.addEventListener('click', () => {
+    nav.classList.toggle('active');
+    btn.classList.toggle('active');
+})
+</script>
+{% block content %}
+{% endblock %}
+</body>
+</html>

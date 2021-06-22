@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+{% extends 'nav-bar.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}HEALTH CHECK IN{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
+<style>
+    .quiz-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 5rem;
+    width: 500px;
+    height: 300px;
+    flex-direction: column;
+    background-color: white;
+    padding: 2rem;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .quiz-header{
+    font-family: 'Akaya Telivigala', cursive;
+    font-size: 1.6rem;
+    }
+
+    .answer{
+    font-family: 'Abhaya Libre', serif;
+    }
+
+    ul{
+    list-style-type: none;
+    margin: 0;
+    }
+
+    ul li{
+    font-size: 1.1rem;
+    }
+
+    button{
+    cursor: pointer;
+    background-color: #413d45;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    padding: 0.5rem;
+    }
+
+    button:hover{
+    background-color: #211f24;
+    }
+
+    button:active{
+    background-color: #720d9e;
+    }
+
+    ul li label{
+    cursor: pointer;
+    }
+</style>
+<div class="quiz-container" id="check">
+    <div class="quiz-header" id="question">
+        <h2>Question Text</h2>
+    </div>
+    <ul>
+        <li>
+            <input type="radio" class="answer" id="a" name="answer"><label for="a" id="a-option">Option</label>
+        </li>
+        <li>
+            <input type="radio" class="answer" id="b" name="answer"><label for="b" id="b-option">Option</label>
+        </li>
+        <li>
+            <input type="radio" class="answer" id="c" name="answer"><label for="c" id="c-option">Option</label>
+        </li><br>
+        <button id="btn">Submit</button>
+    </ul>
+
+</div>
+<script>
+    const quizData = [
+{
+question:'How was your day?',
+a:'Great!',
+b:'Okay-ish...',
+c:'Bad :('
+},
+{
+question:'Did you work out?',
+a:'Yes',
+b:'A bit',
+c:'No'
+},
+{
+question:'Did you study as much as you thought you would?',
+a:'Yes',
+b:'Partially',
+c:'No'
+},
+{
+question:'Did you drink enough water?',
+a:'Yes',
+b:'A bit',
+c:'No'
+},
+{
+question:'Did you socialize?',
+a:'Yes',
+b:'Kind of',
+c:'No'
+},
+{
+question:'Did your day stress you out?',
+a:'No',
+b:'A bit',
+c:'Yes'
+},
+{
+question:'Did you take a break?',
+a:'Yes',
+b:'A bit',
+c:'No'
+},
+{
+question:'Did you do something that made you happy?',
+a:'Yes!',
+b:'Kind of',
+c:'No'
+}
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answer = undefined;
+
+const questionEl = document.getElementById('question');
+const aEl = document.getElementById('a-option');
+const bEl = document.getElementById('b-option');
+const cEl = document.getElementById('c-option');
+const submitBtn = document.getElementById('btn');
+const answerEls = document.querySelectorAll('.answer');
+const check = document.getElementById('check');
+
+console.log(check);
+loadQuiz();
+
+function loadQuiz(){
+answer= undefined;
+deselectAnswer();
+const currentQuizData = quizData[currentQuestion];
+questionEl.innerHTML = currentQuizData.question;
+aEl.innerHTML = currentQuizData.a;
+bEl.innerHTML = currentQuizData.b;
+cEl.innerHTML = currentQuizData.c;
+currentQuestion++;
+}
+
+function deselectAnswer(){
+answerEls.forEach((answerEl) =>{
+answerEl.checked= false;
+});
+}
+
+function getSelected(){
+answerEls.forEach((answerEl) =>{
+if(answerEl.checked){
+ answer = answerEl.id;
+ }});
+}
+
+submitBtn.addEventListener('click', ()=>{
+getSelected();
+if(answer){
+if(answer === 'a'){
+score= score+3;
+}
+if(answer === 'b'){
+score= score+2;
+}
+if(answer === 'c'){
+score= score+1;
+}
+if(currentQuestion < quizData.length){
+loadQuiz();
+}
+else{
+<!--alert('You\'ve reached the end of the check in!');-->
+check.innerHTML = `<h2>Congratulations! <br> You scored ${score} out of 24!</h2>`;
+}}})
+</script>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+{% extends 'nav-bar.html' %}
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}WELCOME{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+<div id="welcome">
+</div>
+<style>
+    .heart{
+position: fixed;
+font_size: 2rem;
+top: -1vh;
+transform: translateY(0vh);
+-webkit-animation: fall 3s linear forwards;
+}
+
+@-webkit-keyframes fall{
+ to{
+  transform: translateY(105vh);
+ }
+}
+
+#welcome{
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 2rem;
+text-align: center;
+margin-top: 2rem;
+}
+</style>
+<script>
+    function createHeart(){
+const heart = document.createElement('div');
+heart.classList.add('heart');
+heart.innerText = '💜';
+heart.style.left = Math.random()*100 + "vw";
+heart.style.animationDuration = Math.random()*2 + 3+ "s";
+document.body.appendChild(heart);
+
+setTimeOut(() => {
+heart.remove();
+}, 5000);
+}
+
+setInterval(createHeart, 1000);
+</script>
+<script>
+    const text = 'Welcome Sanya!'
+let index=0;
+
+function writeText(){
+const div = document.getElementById('welcome');
+div.innerText = text.slice(0, index);
+index++;
+if(index> text.length){
+index = 0;
+}
+}
+
+writeText();
+setInterval(writeText, 100);
+
+</script>
+{% endblock %}
+</body>
+</html>
