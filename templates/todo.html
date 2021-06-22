@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'nav-bar.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}TODOS{% endblock %}</title>
+</head>
+<body>
+{% block content %}
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre&display=swap" rel="stylesheet">
+<style>
+    form{
+    max-width: 100%;
+    width: 400px;
+    margin: auto;
+    font-family: 'Akaya Telivigala', cursive;
+    text-align: center;
+    }
+
+    #head{
+    font-size: 2.5rem;
+    margin: auto;
+    text-align: center;
+    margin: 4px 0;
+    }
+
+    .input{
+    text-align: center;
+    font-size: 1.5rem;
+    }
+
+    #todos{
+    font-family: 'Abhaya Libre', serif;
+    font-size: 1.2rem;
+    list-style-type: square;
+    }
+
+    .completed{
+    color: #94908f;
+    text-decoration: line-through;
+    }
+
+</style>
+<h2 id="head">Todo</h2>
+<form id="form">
+    <input type="text" class="input" id="input" autocomplete="off" placeholder="Enter your todo">
+</form>
+<ul id="todos">
+    <li class="todo-li1">Add local storage facility later</li>
+</ul>
+<script>
+<!--    //Todo-->
+const form= document.getElementById('form');
+const input = document.getElementById('input');
+const todoEls = document.getElementById('todos');
+let index = 2;
+
+<!--//const todos = JSON.parse(localStorage.getItem('todos'));-->
+
+form.addEventListener('submit', (e) =>{
+e.preventDefault();
+console.log(e);
+console.log(input);
+addTodo(undefined);
+});
+
+
+function addTodo(todoText){
+let todo= input.value;
+console.log(todo);
+if(todoText){
+todo= todoText.text;
+}
+if(todo){
+const todoEl = document.createElement('li');
+todoEl.innerText = todo;
+todoEl.classList.add(`todo-li${index}`);
+index++;
+todoEls.appendChild(todoEl);
+input.value='';
+}
+}
+
+
+todoEls.addEventListener('click', (e) => {
+console.log(e);
+e.target.classList.toggle('completed');
+});
+</script>
+{% endblock %}
+</body>
+</html>
